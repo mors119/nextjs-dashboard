@@ -8,7 +8,7 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
-
+// async가 붙어 있으면 pramise 리턴 await로 받아야함
 export async function fetchRevenue() {
   try {
     // Artificially delay a response for demo purposes.
@@ -86,7 +86,7 @@ export async function fetchCardData() {
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
-  currentPage: number,
+  currentPage: number
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
