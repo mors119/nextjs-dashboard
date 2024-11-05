@@ -13,7 +13,7 @@ export default async function DashboardPage() {
   return (
     <main>
       <h2 className={`${lusitana.className} text-[24px]`}>Dashboard</h2>
-      <div>
+      <div className="flex gap-4">
         <Card title="Collected" value={totalPaidInvoices} type="collected" />
         <Card title="Pending" value={totalPendingInvoices} type="pending" />
         <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
