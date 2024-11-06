@@ -10,7 +10,7 @@ import { Suspense } from 'react';
 export default async function IvoicesPage({
   searchParams,
 }: {
-  searchParams?: { query?: string; page?: string };
+  searchParams?: Promise<{ query?: string; page?: string }>;
 }) {
   const params = await searchParams;
   const query = params?.query || '';
