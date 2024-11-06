@@ -33,6 +33,7 @@ const config: Config = {
         'point-color2': '#0070f3',
       },
     },
+    // skeletons에 있는 shimmer
     keyframes: {
       shimmer: {
         '100%': {

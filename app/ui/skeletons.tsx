@@ -1,4 +1,5 @@
 // Loading animation
+// tailwind는 띄어쓰기를 할 수 없으므로 _로 연결 shimmer_2s_
 const shimmer =
   'before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/60 before:to-transparent';
 
@@ -88,13 +89,13 @@ export default function DashboardSkeleton() {
       <div
         className={`${shimmer} relative mb-4 h-8 w-36 overflow-hidden rounded-md bg-gray-100`}
       />
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 grid-cols-4">
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+      <div className="mt-6 grid grid-cols-2 gap-6 sm:grid-cols-1 ">
         <RevenueChartSkeleton />
         <LatestInvoicesSkeleton />
       </div>

@@ -19,9 +19,9 @@ export default async function CustomersTable({
       <Search placeholder="Search customers..." />
       <div className="mt-6 flow-root">
         <div className="overflow-x-auto">
-          <div className="inline-block min-w-full align-middle">
+          <div className="inline-block w-full align-middle">
             <div className="overflow-hidden rounded-md bg-gray-50 p-2 md:pt-0">
-              <div className="md:hidden">
+              <div className="sm:hidden">
                 {customers?.map((customer) => (
                   <div
                     key={customer.id}

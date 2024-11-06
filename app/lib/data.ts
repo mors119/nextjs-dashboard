@@ -8,13 +8,18 @@ import {
   Revenue,
 } from './definitions';
 import { formatCurrency } from './utils';
+// 캐싱 방지 함수 (as 별명 === sql) 바로 서버에서 가져오도록
+import { unstable_noStore as noStore } from 'next/cache';
+
 // async가 붙어 있으면 pramise 리턴 await로 받아야함
 export async function fetchRevenue() {
+  noStore();
+
   try {
     // 데모 목적으로 응답을 인위적으로 지연합니다.
     // 프로덕션에서 이렇게 하지 마세요 :)]
-    // console.log('Fetching revenue data...');
-    // await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log('Fetching revenue data...');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
@@ -28,6 +33,8 @@ export async function fetchRevenue() {
 }
 
 export async function fetchLatestInvoices() {
+  noStore();
+
   try {
     const data = await sql<LatestInvoiceRaw>`
       SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
@@ -48,6 +55,8 @@ export async function fetchLatestInvoices() {
 }
 
 export async function fetchCardData() {
+  noStore();
+
   try {
     // 이를 하나의 SQL 쿼리로 결합할 수 있습니다
     // 그러나 우리는 의도적으로 다음을 입증하기 위해 그들을 나누고 있습니다
@@ -89,6 +98,8 @@ export async function fetchFilteredInvoices(
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
+  noStore();
+
   try {
     const invoices = await sql<InvoicesTable>`
       SELECT
@@ -119,6 +130,8 @@ export async function fetchFilteredInvoices(
 }
 
 export async function fetchInvoicesPages(query: string) {
+  noStore();
+
   try {
     const count = await sql`SELECT COUNT(*)
     FROM invoices
@@ -140,6 +153,8 @@ export async function fetchInvoicesPages(query: string) {
 }
 
 export async function fetchInvoiceById(id: string) {
+  noStore();
+
   try {
     const data = await sql<InvoiceForm>`
       SELECT
@@ -165,6 +180,8 @@ export async function fetchInvoiceById(id: string) {
 }
 
 export async function fetchCustomers() {
+  noStore();
+
   try {
     const data = await sql<CustomerField>`
       SELECT
@@ -183,6 +200,8 @@ export async function fetchCustomers() {
 }
 
 export async function fetchFilteredCustomers(query: string) {
+  noStore();
+
   try {
     const data = await sql<CustomersTableType>`
 		SELECT
