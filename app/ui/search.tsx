@@ -3,14 +3,16 @@
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function Search({ placeholder }: { placeholder: string }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+
   // 이벤트 핸들러를 사용할 때는 상단에 'use client';를 사용한다.
   // url 변경을 위한 핸들러
-  function handleSearch(term: string) {
+  const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams();
     if (term) {
       params.set('query', term);
@@ -19,7 +21,7 @@ export default function Search({ placeholder }: { placeholder: string }) {
     }
     // console.log(params.get('query'));
     replace(`${pathname}?${params.toString()}`);
-  }
+  }, 300);
 
   return (
     <div className="relative flex flex-1 flex-shrink-0">
