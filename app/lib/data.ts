@@ -233,3 +233,25 @@ export async function fetchFilteredCustomers(query: string) {
     throw new Error('Failed to fetch customer table.');
   }
 }
+
+// page 번호
+// total 30
+// pagesize 3
+// 1-3 no 1
+// 4-6 2
+// 7-9 3
+// 10-12 4
+// 13-15 5
+// count 5
+// 1-5
+// 6-10
+// 11-15
+// 16-20
+// 21-25
+
+// 1 to x
+// 1 + x to x * no
+
+// y = (x * (no - 1))
+
+// 1 + y to x * no
