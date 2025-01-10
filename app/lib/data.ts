@@ -11,8 +11,8 @@ import { formatCurrency } from './utils';
 
 export async function fetchRevenue() {
   try {
-    // Artificially delay a response for demo purposes.
-    // Don't do this in production :)
+    //데모 목적에 대한 응답을 인위적으로 지연시킵니다.
+    // 제작에서 이것을하지 마십시오 :)
 
     // console.log('Fetching revenue data...');
     // await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -50,16 +50,17 @@ export async function fetchLatestInvoices() {
 
 export async function fetchCardData() {
   try {
-    // You can probably combine these into a single SQL query
-    // However, we are intentionally splitting them to demonstrate
-    // how to initialize multiple queries in parallel with JS.
+    // 아마도 이것들을 단일 SQL 쿼리로 결합 할 수 있습니다.
+    // 그러나 우리는 의도적으로 그들을 시연하기 위해 나누고 있습니다
+    // JS와 병렬로 여러 쿼리를 초기화하는 방법.
     const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
     const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
     const invoiceStatusPromise = sql`SELECT
-         SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
-         SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
-         FROM invoices`;
+          SUM(CASE WHEN status = 'paid' THEN amount ELSE 0 END) AS "paid",
+          SUM(CASE WHEN status = 'pending' THEN amount ELSE 0 END) AS "pending"
+          FROM invoices`;
 
+    // Promise.all : 모든 함수를 동시에 실행할 수 있도록
     const data = await Promise.all([
       invoiceCountPromise,
       customerCountPromise,
@@ -157,7 +158,7 @@ export async function fetchInvoiceById(id: string) {
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
     }));
-
+    console.log(invoice); // Invoice는 빈 배열 []
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);

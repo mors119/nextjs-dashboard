@@ -1,4 +1,4 @@
-//이 파일에는 데이터에 대한 유형 정의가 포함되어 있습니다.
+// 이 파일에는 데이터에 대한 유형 정의가 포함되어 있습니다.
 // 데이터의 모양과 각 속성이 수락 해야하는 데이터 유형을 설명합니다.
 // 교육의 단순성을 위해 이러한 유형을 수동으로 정의하고 있습니다.
 // 그러나 Prisma나 Drizzle 같은 ORM을 사용하는 경우 이러한 유형이 자동으로 생성됩니다.
@@ -17,9 +17,9 @@ export type Customer = {
 };
 
 export type Invoice = {
-  id: string;
+  id: string; // 데이터베이스에서 생성됩니다
   customer_id: string;
-  amount: number;
+  amount: number; // 센트로 저장
   date: string;
   // typeScript에서 이것을 문자열 유니언 유형이라고합니다.
   // "상태"속성은 두 줄 중 하나 일 수 있음을 의미합니다.
